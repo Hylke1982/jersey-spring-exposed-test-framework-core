@@ -34,7 +34,7 @@ import java.util.logging.*;
 
 /**
  * Hylke Stapersma (codecentric nl)
- * <p/>
+ *
  * Copy of JerseyTest @see org.glassfish.jersey.test.JerseyTest where the spring ApplicationContext is exposed
  * hylke.stapersma@codecentric.nl
  */
@@ -208,12 +208,10 @@ public class SpringContextJerseyTest {
     /**
      * Return an JAX-RS applicationHandler that defines how the applicationHandler in the
      * test container is configured.
-     * <p/>
      * If a constructor is utilized that does not supply an applicationHandler
      * descriptor then this method must be overridden to return an applicationHandler
      * descriptor, otherwise an {@link UnsupportedOperationException} exception
      * will be thrown.
-     * <p/>
      * If a constructor is utilized that does supply an applicationHandler descriptor
      * then this method does not require to be overridden and will not be
      * invoked.
@@ -242,7 +240,7 @@ public class SpringContextJerseyTest {
     /**
      * Create a web resource whose URI refers to the base URI the Web
      * applicationHandler is deployed at plus the path specified in the argument.
-     * <p/>
+     *
      * This method is an equivalent of calling {@code target().path(path)}.
      *
      * @param path Relative path (from base URI) this target should point to.
@@ -302,11 +300,11 @@ public class SpringContextJerseyTest {
 
     /**
      * Creates an instance of {@link Client}.
-     * <p/>
+     *
      * Checks whether TestContainer provides ClientConfig instance and
      * if not, empty new {@link org.glassfish.jersey.client.ClientConfig} instance
      * will be used to create new client instance.
-     * <p/>
+     *
      * This method is called exactly once when JerseyTest is created.
      *
      * @param tc instance of {@link TestContainer}
@@ -332,7 +330,7 @@ public class SpringContextJerseyTest {
     /**
      * Can be overridden by subclasses to conveniently configure the client instance
      * used by the test.
-     * <p/>
+     *
      * Default implementation of the method is "no-op".
      *
      * @param config Jersey test client configuration that can be modified before the client is created.
