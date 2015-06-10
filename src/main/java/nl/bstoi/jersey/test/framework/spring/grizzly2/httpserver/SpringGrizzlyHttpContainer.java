@@ -14,7 +14,6 @@ import org.glassfish.jersey.internal.util.ExtendedLogger;
 import org.glassfish.jersey.internal.util.collection.Ref;
 import org.glassfish.jersey.process.internal.RequestScoped;
 import org.glassfish.jersey.server.*;
-import org.glassfish.jersey.server.internal.ConfigHelper;
 import org.glassfish.jersey.server.spi.Container;
 import org.glassfish.jersey.server.spi.ContainerLifecycleListener;
 import org.glassfish.jersey.server.spi.ContainerResponseWriter;
@@ -82,7 +81,7 @@ public class SpringGrizzlyHttpContainer extends HttpHandler implements Container
 
     /**
      * An internal binder to enable Grizzly HTTP container specific types injection.
-     * <p/>
+     * <p>
      * This binder allows to inject underlying Grizzly HTTP request and response instances.
      * Note that since Grizzly {@code Request} class is not proxiable as it does not expose an empty constructor,
      * the injection of Grizzly request instance into singleton JAX-RS and Jersey providers is only supported via
@@ -280,14 +279,13 @@ public class SpringGrizzlyHttpContainer extends HttpHandler implements Container
      */
     SpringGrizzlyHttpContainer(final Application application) {
         this.appHandler = new ApplicationHandler(application, new GrizzlyBinder());
-        this.containerListener = ConfigHelper.getContainerLifecycleListener(appHandler);
         cacheConfigSetStatusOverSendError();
     }
 
     @Override
     public void start() {
         super.start();
-        containerListener.onStartup(this);
+        this.appHandler.onStartup(this);
     }
 
     @Override
@@ -331,9 +329,8 @@ public class SpringGrizzlyHttpContainer extends HttpHandler implements Container
 
     @Override
     public void reload(ResourceConfig configuration) {
-        this.containerListener.onShutdown(this);
+        this.appHandler.onShutdown(this);
         appHandler = new ApplicationHandler(configuration, new GrizzlyBinder());
-        this.containerListener = ConfigHelper.getContainerLifecycleListener(appHandler);
         containerListener.onReload(this);
         containerListener.onStartup(this);
         cacheConfigSetStatusOverSendError();
@@ -347,7 +344,7 @@ public class SpringGrizzlyHttpContainer extends HttpHandler implements Container
     @Override
     public void destroy() {
         super.destroy();
-        containerListener.onShutdown(this);
+        this.appHandler.onShutdown(this);
         appHandler = null;
     }
 
@@ -423,4 +420,6 @@ public class SpringGrizzlyHttpContainer extends HttpHandler implements Container
     public ApplicationContext getSpringApplicationContext() {
         return getApplicationHandler().getServiceLocator().getService(ApplicationContext.class);
     }
+
+
 }

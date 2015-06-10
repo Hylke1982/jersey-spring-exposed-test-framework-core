@@ -27,11 +27,11 @@ Maven
 
 You're able to get this library from the maven repository using the following dependency declaration.
 
-```
+```xml
 <dependency>
 <groupId>nl.bstoi.jersey.test-framework</groupId>
 <artifactId>jersey-spring-exposed-test-framework-core</artifactId>
-<version>2.17</version>
+<version>2.18</version>
 <scope>test</scope>
 </dependency>
 ```
@@ -39,7 +39,7 @@ You're able to get this library from the maven repository using the following de
 Creating a test
 ---------------
 
-```
+```java
 // Test example using mockito
 public class SomeResourceTest extends SpringContextJerseyTest {
 
