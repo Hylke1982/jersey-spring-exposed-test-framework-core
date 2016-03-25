@@ -31,7 +31,7 @@ You're able to get this library from the maven repository using the following de
 <dependency>
 <groupId>nl.bstoi.jersey.test-framework</groupId>
 <artifactId>jersey-spring-exposed-test-framework-core</artifactId>
-<version>2.22.1</version>
+<version>2.22.2</version>
 <scope>test</scope>
 </dependency>
 ```
